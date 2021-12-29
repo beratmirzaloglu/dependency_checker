@@ -18,8 +18,8 @@ You can check the outdated dependencies of your Node.js and PHP projects and you
 
 ### Built With
 
-- [Nest.js](https://nestjs.com/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Nest.js](https://nestjs.com/)
 - [RabbitMQ](https://www.rabbitmq.com/)
 
 <!-- INSTALLATION -->
