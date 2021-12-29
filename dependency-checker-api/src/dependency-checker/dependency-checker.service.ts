@@ -82,7 +82,7 @@ export class DependencyCheckerService {
   }
 
   scheduleMail(repositoryUrl: string, emailList: string[]): void {
-    const delay = 1 * 20 * 1000; // 5 minutes
+    const delay = 24 * 60 * 60 * 1000; // 24 hours in miliseconds
     const nextDependencyCheckTimestamp = new Date().getTime() + delay;
     const scheduleMailContent: ScheduleMailDto = {
       repositoryUrl,
