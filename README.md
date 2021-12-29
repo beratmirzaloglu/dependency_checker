@@ -14,7 +14,7 @@
 
 ## About The Project
 
-You can check your Node.js and PHP (for now) projects' outdated dependencies and you can subscribe to get outdated dependencies every 24 hours.
+You can check the outdated dependencies of your Node.js and PHP projects and you can subscribe to get outdated dependencies every 24 hours.
 
 ### Built With
 
