@@ -14,7 +14,7 @@
 
 ## About The Project
 
-You can check the outdated dependencies of your Node.js and PHP projects and you can subscribe to get outdated dependencies every 24 hours.
+You can check the outdated dependencies of your Node.js and PHP projects and you can subscribe to get mails of outdated dependencies every 24 hours.
 
 ### Built With
 
@@ -55,7 +55,7 @@ You can check the outdated dependencies of your Node.js and PHP projects and you
 
 ## Usage
 
-After you completed installation processes, you can send Post request to API via HTTP tool (like Postman). Here is an example for post request:
+After you complete the installation process, you can send Post requests to API via HTTP tool (like Postman). Here is an example for post request:
 
 ![Example API Request](https://i.hizliresim.com/s204mb4.png)
 
