@@ -25,8 +25,8 @@ export class AppController {
         scheduleMailDto;
       const channel = context.getChannelRef();
       const message = context.getMessage();
-      //channel.ack(message);
       const currentTimestamp = new Date().getTime();
+
       if (nextDependencyCheckTimestamp > currentTimestamp) {
         channel.nack(message);
       } else {
