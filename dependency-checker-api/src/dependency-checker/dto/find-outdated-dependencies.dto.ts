@@ -1,8 +1,8 @@
 import {
   IsArray,
+  IsEmail,
   IsNotEmpty,
   IsOptional,
-  IsString,
   IsUrl,
 } from 'class-validator';
 
@@ -12,7 +12,7 @@ export class FindOutdatedDependenciesDto {
   repositoryUrl: string;
 
   @IsOptional()
-  @IsString({ each: true })
+  @IsEmail({}, { each: true })
   @IsArray()
   emailList: string[];
 }

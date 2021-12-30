@@ -68,10 +68,11 @@ export class NodeJsService {
         const response = await ApiHelper.get(url);
         const packageDetails = response.data;
 
+        // Remove ^ char from current version for compare
         const currentVersion = dependency.version.replace('^', '').split('.');
         const latestVersion = (packageDetails['latest'] as string).split('.');
 
-        // if digits counts are not equal, make them equal
+        // if digits counts of versions are not equal, make them equal
         if (latestVersion.length !== currentVersion.length) {
           StaticFunctions.makeVersionCodesSameLength(
             currentVersion,

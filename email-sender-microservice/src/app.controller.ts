@@ -1,17 +1,13 @@
 import { Controller } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { ScheduleMailDto } from './dto/schedule-mail.dto';
-import { IDependencies } from './interfaces/dependency.interface';
 import { MailService } from './mail/mail.service';
-import { HttpService } from '@nestjs/axios';
-import { lastValueFrom } from 'rxjs';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly mailService: MailService,
-    private readonly httpService: HttpService,
     private readonly appService: AppService,
   ) {}
 
@@ -30,21 +26,19 @@ export class AppController {
       if (nextDependencyCheckTimestamp > currentTimestamp) {
         channel.nack(message);
       } else {
-        const result = await lastValueFrom(
-          this.httpService.post(process.env.API_URL + '/dependency-checker', {
+        const outdatedDependencies =
+          await this.appService.getOutdatedDependencies(
             repositoryUrl,
             emailList,
-          }),
-        );
-        const dependencies: IDependencies = result.data;
+          );
 
         const mailContent = this.appService.prepareMailContent(
           repositoryUrl,
-          dependencies,
+          outdatedDependencies,
         );
 
         emailList.forEach((email) => {
-          this.mailService.sendTestMail(email, mailContent);
+          this.mailService.sendMail(email, mailContent);
         });
 
         channel.ack(message); // Task succeed!

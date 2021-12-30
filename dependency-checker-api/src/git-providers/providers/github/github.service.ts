@@ -8,6 +8,9 @@ import { RepositoryContent } from 'src/types/repository-content.type';
 import { GithubConfig } from './github.config';
 
 export class GithubService {
+  // Converts https://github.com/beratmirzaloglu/nestjs-task-management
+  // to -->
+  // https://api.github.com/repos/beratmirzaloglu/nestjs-task-management/contents
   static convertRepoUrlToApiReqUrl(repositoryUrl: string): string {
     const url = StaticFunctions.convertToURL(repositoryUrl);
     // Split list by '/' and remove empty strings in it.
@@ -36,6 +39,8 @@ export class GithubService {
   static findRepositoryLanguage(
     repositoryContent: RepositoryContent,
   ): ISoftwareLanguage {
+    // Checks our software languages config and find repository language by dependency file name
+    // for example: package.json for Node.js // composer.json for PHP
     for (const item of repositoryContent) {
       for (const language of SoftwareLanguageConfigs) {
         if (item['name'] === language.dependencyFileName) {
@@ -53,6 +58,7 @@ export class GithubService {
     repositoryContent: RepositoryContent,
     softwareLanguage: ISoftwareLanguage,
   ): Promise<DependencyFileContent> {
+    // Get package.json or composer.json content depends on repository language
     const file = repositoryContent.find(
       (item) => item['name'] === softwareLanguage.dependencyFileName,
     );

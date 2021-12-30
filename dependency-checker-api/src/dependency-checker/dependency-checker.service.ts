@@ -23,20 +23,15 @@ export class DependencyCheckerService {
     const { repositoryUrl } = findOutdatedDependenciesDto;
 
     this.gitProviderConfig = this.findGitProvider(repositoryUrl);
-
     const repositoryContent = await this.getRepositoryContent(repositoryUrl);
-
     this.repositoryLanguage =
       this.gitProviderConfig.findRepositoryLanguage(repositoryContent);
-
     const dependencyFileContent = await this.getDependencyFileContent(
       repositoryContent,
     );
-
     const dependencyList = this.repositoryLanguage.getDependencyList(
       dependencyFileContent,
     );
-
     const outdatedDependencyList =
       await this.repositoryLanguage.findOutdatedDependencies(dependencyList);
 
@@ -83,6 +78,7 @@ export class DependencyCheckerService {
 
   scheduleMail(repositoryUrl: string, emailList: string[]): void {
     const delay = 24 * 60 * 60 * 1000; // 24 hours in miliseconds
+    // const delay = 1 * 10 * 60 * 1000; // 10 minutes in miliseconds (For testing.)
     const nextDependencyCheckTimestamp = new Date().getTime() + delay;
     const scheduleMailContent: ScheduleMailDto = {
       repositoryUrl,

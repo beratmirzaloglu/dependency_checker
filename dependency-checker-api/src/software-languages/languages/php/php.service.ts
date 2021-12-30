@@ -67,10 +67,13 @@ export class PhpService {
         const response = await ApiHelper.get(url);
         const packageDetails = response.data;
 
+        // Remove ^ and ~ chars from current version for compare
         const currentVersion = dependency.version
           .replace('~', '')
           .replace('^', '')
           .split('.');
+
+        // Remove v char from latest version for compare
         const latestVersion = (
           packageDetails['packages'][dependency.name][0]['version'] as string
         )
@@ -93,7 +96,7 @@ export class PhpService {
               '.',
             )} --> ${latestVersion.join('.')}`;
 
-            console.log(versionString);
+            console.log(dependency.name + ' = ' + versionString);
 
             outdatedDependencies.push({
               name: dependency.name,
